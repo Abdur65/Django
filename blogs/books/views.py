@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
-from django.views.generic import ListView, FormView
+from django.views.generic import ListView, FormView, CreateView
 from books.models import Book
 from django.urls import reverse_lazy
-from books.forms import ContactForm
+from books.forms import ContactForm, BookForm
 # Create your views here.
 
 def my_view(request):
@@ -27,4 +27,11 @@ class ContactFormView(FormView):
     def form_valid(self, form) -> HttpResponse:
         return super().form_valid(form)
     
+class BookCreateView(CreateView):
+    model = Book
+    form_class = BookForm
+    template_name = 'books_form.html'
+    success_url = reverse_lazy("book_list")
     
+    def price_valid(self, form) -> HttpResponse:
+        return super().form_valid(form)   
