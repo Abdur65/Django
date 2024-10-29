@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Author(models.Model):
@@ -23,4 +24,4 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE, null=True, blank=True, related_name='books')
     
 
-    
+

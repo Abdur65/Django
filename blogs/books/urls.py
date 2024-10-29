@@ -1,6 +1,6 @@
 from django.urls import path
 from django.shortcuts import render
-from books.views import my_view, MyView, BookListView, ContactFormView
+from books.views import my_view, MyView, BookListView, ContactFormView, BookListCreate
 
 
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     path("list/", BookListView.as_view()),
     path("contact/add", ContactFormView.as_view()),
     path("contact_success/", lambda request: render(request, "success/contact_success.html"), name="contact_success"),
+    path('rest_books/', BookListCreate.as_view(), name='book-list-create')
 ]
