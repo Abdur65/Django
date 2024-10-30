@@ -15,6 +15,7 @@
                 </li>
             {% endfor %}
         </ul>
+        <p>Add a book  <a href="{% url 'create-book' %}">Add</a></p>
     {% else %}
         <p>No books available at the moment.</p>
     {% endif %}

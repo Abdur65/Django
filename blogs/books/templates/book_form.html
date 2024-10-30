@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Add a new book</title>
@@ -17,6 +17,35 @@
         <li>{{ field }}: {{errors|join:", "}} </li>
         {% endfor %}
     </ul>
+    {% endif %}
+</body>
+</html> -->
+
+<!-- library/templates/library/create_book.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Book</title>
+</head>
+<body>
+    <h1>Create a New Book</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+
+    {% if form.errors %}
+        <div style="color: red;">
+            <ul>
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <li>{{ field|capfirst }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
     {% endif %}
 </body>
 </html>
