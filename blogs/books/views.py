@@ -12,10 +12,11 @@ from books.serializers import BookSerializer, AuthorSerializer, PublisherSeriali
 
 # From rest_framework
 from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
+
 
 
 # General Views
@@ -52,7 +53,10 @@ class BookCreateView(CreateView):
 
 # Rest_framework APIs   
 class BookListCreate(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
     def get(self, request):
+        print(request.user)
         books = Book.objects.all()
         serializer = BookSerializer(books, many=True)
         return Response(serializer.data)
