@@ -1,6 +1,5 @@
 # Django
-# from django.contrib.auth import auth_views
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth import views as auth_views
 from django.urls import path
 
 # restframework
@@ -10,8 +9,8 @@ from .views import RegisterView, mymodel_view, LogoutView
 from books.views import BookListView
 
 urlpatterns = [
-    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
-    # path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path("list/", BookListView.as_view(), name="list"),
     path('register/', RegisterView.as_view(), name='register'),
     path('restricted/', mymodel_view, name='mymodel_view'),

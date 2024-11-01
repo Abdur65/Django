@@ -13,6 +13,10 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 
+@permission_required('books.can_view_mymodel', raise_exception=True)
+def mymodel_view(request):
+    return HttpResponse("This is a restricted view for users with the 'can_view_mymodel' permission.")
+
 class RegisterView(CreateView):
     form_class = UserCreationForm
     template_name = 'registration.html'
@@ -30,9 +34,7 @@ class LogoutView(APIView):
         except Exception as e:
             return Response({"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
     
-@permission_required('user.can_view_mymodel', raise_exception=True)
-def mymodel_view(request):
-    return HttpResponse("This is a restricted view for users with the 'can_view_mymodel' permission.")
+
 
 
 
